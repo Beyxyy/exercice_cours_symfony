@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PostController!{% endblock %}
+
+{% block body %}
+    <style>
+
+
+    </style>
+
+    <div class="example-wrapper">
+        <h1>Affichage de tous mes blogs</h1>
+
+        <div class="col col-sm">
+            <div class="card" style="width: 18rem;">
+                <img src="{{ vich_uploader_asset(post) }}" alt="{{ post.title }}">
+                <div class="card-body">
+                    <a href="{{ path('app_like', {'slug' : post.slug}) }}">
+                        liker {{ post.likes |length }} </a>
+                    <h5 class="card-title"><h2>{{ post.title }} </h2></h5>
+                    <p class="card-text">{{ post.content | raw }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Commentaires</h3>
+
+            <div>
+
+                {% for comment in post.comments %}
+
+                    <p>{{ comment.sujet }}</p>
+
+                    <p>{{ comment.content }}</p>
+
+                {% endfor %}
+                {% if app.user %}
+
+
+                    {{ form_start(form) }}
+                    {{ form_widget(form) }}
+                    <button class="btn">Commentez</button>
+
+                {% else %}
+                    <a href="{{ path('app_login') }}"> Connectez vous pour commenter</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

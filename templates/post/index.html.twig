@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PostController!{% endblock %}
+
+{% block body %}
+    <style>
+
+
+    </style>
+
+    <div class="example-wrapper">
+        <h1>Affichage de tous mes blogs</h1>
+
+        {% for post in posts %}
+            <div class="col col-sm">
+                <div class="card" style="width: 18rem;">
+                    <img src="{{ vich_uploader_asset(post) }}" alt="{{ post.title }}">
+                    <div class="card-body">
+                        <h5 class="card-title"><h2>{{ post.title }}</h2></h5>
+                        <p class="card-text">{{ post.content | raw }}</p>
+                        <a href="{{ path('app_post_detail', {'slug' : post.slug}) }}" class="btn btn-primary">voir plus
+                            de
+                            détails</a>
+                    </div>
+                </div>
+            </div>
+
+
+        {% endfor %}
+
+    </div>
+{% endblock %}
